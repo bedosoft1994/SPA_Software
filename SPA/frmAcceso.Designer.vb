@@ -40,9 +40,9 @@ Partial Class frmAcceso
         '
         'btnAceptar
         '
-        Me.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btnAceptar.Enabled = False
-        Me.btnAceptar.Location = New System.Drawing.Point(183, 61)
+        Me.btnAceptar.Location = New System.Drawing.Point(90, 61)
         Me.btnAceptar.Name = "btnAceptar"
         Me.btnAceptar.Size = New System.Drawing.Size(87, 24)
         Me.btnAceptar.TabIndex = 5
@@ -86,7 +86,7 @@ Partial Class frmAcceso
         'btnCancelar
         '
         Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.Location = New System.Drawing.Point(91, 61)
+        Me.btnCancelar.Location = New System.Drawing.Point(183, 61)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(87, 24)
         Me.btnCancelar.TabIndex = 6
@@ -154,7 +154,7 @@ Partial Class frmAcceso
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancelar
-        Me.ClientSize = New System.Drawing.Size(282, 97)
+        Me.ClientSize = New System.Drawing.Size(278, 93)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)

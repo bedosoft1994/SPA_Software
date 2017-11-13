@@ -1,6 +1,4 @@
-﻿Imports MySql.Data.MySqlClient
-
-Public Class frmAcceso
+﻿Public Class frmAcceso
     Private Sub frmAcceso_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tbUsuario.Text = ""
         tbPassword.Text = ""

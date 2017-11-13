@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.ComponentModel
+Imports MySql.Data.MySqlClient
 
 Public Class frmPrincipal
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -87,46 +88,59 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub btnServicios_Click(sender As Object, e As EventArgs) Handles btnServicios.Click
-
+        frmServicios.MdiParent = Me
+        frmServicios.Show()
     End Sub
 
     Private Sub btnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
-
+        frmEmpleados.MdiParent = Me
+        frmEmpleados.Show()
     End Sub
 
     Private Sub btnClientes_Click(sender As Object, e As EventArgs) Handles btnClientes.Click
-
+        frmClientes.MdiParent = Me
+        frmClientes.Show()
     End Sub
 
     Private Sub btnCitas_Click(sender As Object, e As EventArgs) Handles btnCitas.Click
-
+        frmCalendario.MdiParent = Me
+        frmCalendario.Dock = DockStyle.Fill
+        frmCalendario.Show()
     End Sub
 
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
-
+        frmInformes.MdiParent = Me
+        frmInformes.Show()
     End Sub
 
     Private Sub btnEstadisticas_Click(sender As Object, e As EventArgs) Handles btnEstadisticas.Click
-
+        frmEstadística.MdiParent = Me
+        frmEstadística.Show()
     End Sub
 
     Private Sub btnConfiguracion_Click(sender As Object, e As EventArgs) Handles btnConfiguracion.Click
-
+        frmConfiguracion.MdiParent = Me
+        frmConfiguracion.Show()
     End Sub
 
     Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
-
+        frmAcercade.ShowDialog()
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub frmPrincipal_Closing(sender As Object, e As CancelEventArgs) Handles Me.FormClosing
         If MsgBox("¿Desea salir de la aplicación?", CType(vbYesNo + vbExclamation + vbDefaultButton2, MsgBoxStyle)) = vbYes Then
             If Editando Then
-                If MsgBox("Tiene datos no guardados, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, MsgBoxStyle)) = vbCancel Then
+                If MsgBox("No se han  guardado los datos, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbNo Then
+                    e.Cancel = True
                     Exit Sub
                 End If
             End If
-            Application.Exit()
+        Else
+            e.Cancel = True
         End If
     End Sub
-
 End Class

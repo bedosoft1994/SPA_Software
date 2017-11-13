@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="MySql.Data.MySqlClient" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -119,6 +120,12 @@
       <DependentUpon>frmClientes.vb</DependentUpon>
     </Compile>
     <Compile Include="frmClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfiguracion.Designer.vb">
+      <DependentUpon>frmConfiguracion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfiguracion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEmpleados.Designer.vb">
@@ -298,6 +305,15 @@
     <None Include="Iconos\iniciar.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Iconos\Borrar.png" />
+    <None Include="Iconos\Buscar1.png" />
+    <None Include="Iconos\Cancelar.png" />
+    <None Include="Iconos\Editar.png" />
+    <None Include="Iconos\Guradar.png" />
+    <None Include="Iconos\Nuevo.png" />
+    <None Include="Iconos\Salir1.png" />
+    <None Include="Iconos\masaje.jpg" />
+    <None Include="Iconos\SpaFondo.jpg" />
     <Content Include="SPA.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

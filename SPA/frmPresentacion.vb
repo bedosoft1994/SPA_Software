@@ -26,7 +26,7 @@
         '
         '    Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
 
-        Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor)
+        Version.Text = $"Versión del sistema: {String.Format("{0}", My.Application.Info.Version.ToString)}"
 
         'Información de Copyright
         Copyright.Text = My.Application.Info.Copyright
