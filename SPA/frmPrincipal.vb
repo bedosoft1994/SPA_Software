@@ -2,7 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class frmPrincipal
-    Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UsuarioActivo.Nombre = "Sin usuario"
         tssUsuario.BackColor = Color.Pink
         tssUsuario.Text = $"Usuario: {UsuarioActivo.Nombre}"
@@ -29,7 +29,7 @@ Public Class frmPrincipal
         btnConfiguracion.Enabled = Estado
     End Sub
 
-    Private Sub btnSesion_Click(sender As Object, e As EventArgs) Handles btnSesion.Click
+    Private Sub BtnSesion_Click(sender As Object, e As EventArgs) Handles btnSesion.Click
         If btnSesion.Text = "Abrir Sesión" And UsuarioActivo.Nombre = "Sin usuario" Then
             frmAcceso.ShowDialog()
             If frmAcceso.tbUsuario.Text = "" Then Exit Sub
@@ -62,7 +62,7 @@ Public Class frmPrincipal
         End If
     End Sub
 
-    Private Sub btnEmpresa_Click(sender As Object, e As EventArgs) Handles btnEmpresa.Click
+    Private Sub BtnEmpresa_Click(sender As Object, e As EventArgs) Handles btnEmpresa.Click
         frmEmpresa.MdiParent = Me
         frmEmpresa.Show()
     End Sub
@@ -85,53 +85,54 @@ Public Class frmPrincipal
 
         tssFecha.Text = Format(Now(), "Long Date")
         tssHora.Text = Format(Now(), "Long Time")
+        If Conexion.Ping() Then tssEstadoMySql.Text = "fui yo"
     End Sub
 
-    Private Sub btnServicios_Click(sender As Object, e As EventArgs) Handles btnServicios.Click
+    Private Sub BtnServicios_Click(sender As Object, e As EventArgs) Handles btnServicios.Click
         frmServicios.MdiParent = Me
         frmServicios.Show()
     End Sub
 
-    Private Sub btnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
+    Private Sub BtnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
         frmEmpleados.MdiParent = Me
         frmEmpleados.Show()
     End Sub
 
-    Private Sub btnClientes_Click(sender As Object, e As EventArgs) Handles btnClientes.Click
-        frmClientes.MdiParent = Me
-        frmClientes.Show()
+    Private Sub BtnClientes_Click(sender As Object, e As EventArgs) Handles btnClientes.Click
+        FrmClientes.MdiParent = Me
+        FrmClientes.Show()
     End Sub
 
-    Private Sub btnCitas_Click(sender As Object, e As EventArgs) Handles btnCitas.Click
+    Private Sub BtnCitas_Click(sender As Object, e As EventArgs) Handles btnCitas.Click
         frmCalendario.MdiParent = Me
         frmCalendario.Dock = DockStyle.Fill
         frmCalendario.Show()
     End Sub
 
-    Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
+    Private Sub BtnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
         frmInformes.MdiParent = Me
         frmInformes.Show()
     End Sub
 
-    Private Sub btnEstadisticas_Click(sender As Object, e As EventArgs) Handles btnEstadisticas.Click
+    Private Sub BtnEstadisticas_Click(sender As Object, e As EventArgs) Handles btnEstadisticas.Click
         frmEstadística.MdiParent = Me
         frmEstadística.Show()
     End Sub
 
-    Private Sub btnConfiguracion_Click(sender As Object, e As EventArgs) Handles btnConfiguracion.Click
+    Private Sub BtnConfiguracion_Click(sender As Object, e As EventArgs) Handles btnConfiguracion.Click
         frmConfiguracion.MdiParent = Me
         frmConfiguracion.Show()
     End Sub
 
-    Private Sub btnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
+    Private Sub BtnAyuda_Click(sender As Object, e As EventArgs) Handles btnAyuda.Click
         frmAcercade.ShowDialog()
     End Sub
 
-    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+    Private Sub BtnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Application.Exit()
     End Sub
 
-    Private Sub frmPrincipal_Closing(sender As Object, e As CancelEventArgs) Handles Me.FormClosing
+    Private Sub FrmPrincipal_Closing(sender As Object, e As CancelEventArgs) Handles Me.FormClosing
         If MsgBox("¿Desea salir de la aplicación?", CType(vbYesNo + vbExclamation + vbDefaultButton2, MsgBoxStyle)) = vbYes Then
             If Editando Then
                 If MsgBox("No se han  guardado los datos, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbNo Then

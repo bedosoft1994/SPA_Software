@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Revisar los valores de los atributos del ensamblado
 
 <Assembly: AssemblyTitle("SPA Soluciones")>
-<Assembly: AssemblyDescription("Software diseñado para el control Administrativo de un SPA")>
+<Assembly: AssemblyDescription("Software diseñado para el control Administrativo y de Citas de un SPA")>
 <Assembly: AssemblyCompany("Inversiones Bedosoft")>
 <Assembly: AssemblyProduct("SPA")>
 <Assembly: AssemblyCopyright("Copyright © 2017")>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el carácter '*', como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.0.3.0")>
-<Assembly: AssemblyFileVersion("0.0.3.0")>
+<Assembly: AssemblyVersion("0.0.5.0")>
+<Assembly: AssemblyFileVersion("0.0.5.0")>

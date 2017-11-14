@@ -16,7 +16,7 @@ Module Modulo
             }
             Conexion = New MySqlConnection(ConexionStr.ToString)
             Conexion.Open()
-            EstadoConexion = True
+            EstadoConexion = True ' cambiar por conexion.ping()
         Catch ex As Exception
             EstadoConexion = False
         End Try

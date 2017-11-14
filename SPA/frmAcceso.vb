@@ -41,10 +41,10 @@
 
         If BuscarUsuario() And tbPassword.Text = Label4.Text Then
             UsuarioActivo.Nombre = Label3.Text
-            UsuarioActivo.Permiso_Escritura = CInt(Label4.Text)
-            UsuarioActivo.Permiso_Lectura = CInt(Label5.Text)
-            UsuarioActivo.Permiso_Impresion = CInt(Label6.Text)
-            UsuarioActivo.Permiso_Programador = CInt(Label7.Text)
+            UsuarioActivo.Permiso_Escritura = CInt(Label5.Text)
+            UsuarioActivo.Permiso_Lectura = CInt(Label6.Text)
+            UsuarioActivo.Permiso_Impresion = CInt(Label7.Text)
+            UsuarioActivo.Permiso_Programador = 0
             UsuarioActivo.FechaIngreso = Today()
             Exit Sub
         Else

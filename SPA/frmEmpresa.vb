@@ -1,6 +1,19 @@
 ﻿Public Class frmEmpresa
-    Private Sub frmEmpresa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmEmpresa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckTab1()
         BuscarEmpresa("ID", "1")
+    End Sub
+
+    Private Sub CheckTab1()
+        If TabControl1.SelectedTab Is TabPage1 Then
+            BNuevo.Enabled = False
+            BBuscar.Enabled = False
+            BEliminar.Enabled = False
+        Else
+            BNuevo.Enabled = True
+            BBuscar.Enabled = True
+            BEliminar.Enabled = True
+        End If
     End Sub
 
     Private Function BuscarEmpresa(ByVal BuscarPor As String, ByVal Busqueda As String) As Boolean
@@ -40,43 +53,45 @@
         End If
     End Function
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub BNuevo_Click(sender As Object, e As EventArgs) Handles BNuevo.Click
         'Boton nuevo
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub BEditar_Click(sender As Object, e As EventArgs) Handles BEditar.Click
         If Editando Then 'Boton guardar
             Editando = False
-            Button2.Image = SPA.My.Resources.Resources.Editar
-            Button3.Image = SPA.My.Resources.Resources.Borrar
-            Button1.Enabled = True
-            Button4.Enabled = True
+            BEditar.Image = My.Resources.Editar
+            BEliminar.Image = My.Resources.Borrar
+            BNuevo.Enabled = True
+            BBuscar.Enabled = True
 
         Else 'Boton editar
             Editando = True
-            Button2.Image = SPA.My.Resources.Resources.Guradar
-            Button3.Image = SPA.My.Resources.Resources.Cancelar
-            Button1.Enabled = False
-            Button4.Enabled = False
+            BEditar.Image = My.Resources.Guradar
+            BEliminar.Image = My.Resources.Cancelar
+            BNuevo.Enabled = False
+            BBuscar.Enabled = False
 
         End If
+        CheckTab1()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub BEliminar_Click(sender As Object, e As EventArgs) Handles BEliminar.Click
         If Editando Then 'Boton cancelar
 
         Else 'Boton eliminar
 
         End If
+        CheckTab1()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub BBuscar_Click(sender As Object, e As EventArgs) Handles BBuscar.Click
         'Boton buscar
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub BSalir_Click(sender As Object, e As EventArgs) Handles BSalir.Click
         If Editando Then 'Boton salir
             If MsgBox("Los datos no se han guardado, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbYes Then
                 Me.Close()
@@ -85,5 +100,9 @@
             End If
         End If
         Me.Close()
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        CheckTab1()
     End Sub
 End Class
