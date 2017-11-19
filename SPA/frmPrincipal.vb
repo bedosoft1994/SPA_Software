@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports MySql.Data.MySqlClient
 
 Public Class frmPrincipal
     Private Sub FrmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,7 +13,7 @@ Public Class frmPrincipal
         Cronometro.Enabled = True
         tssEstado.Text = $"Versión del sistema: {String.Format("{0}", My.Application.Info.Version.ToString)}"
 
-        ConectarDatos()
+        Datos.Conectar()
 
     End Sub
 
@@ -31,8 +30,8 @@ Public Class frmPrincipal
 
     Private Sub BtnSesion_Click(sender As Object, e As EventArgs) Handles btnSesion.Click
         If btnSesion.Text = "Abrir Sesión" And UsuarioActivo.Nombre = "Sin usuario" Then
-            frmAcceso.ShowDialog()
-            If frmAcceso.tbUsuario.Text = "" Then Exit Sub
+            FrmAcceso.ShowDialog()
+            If FrmAcceso.tbUsuario.Text = "" Then Exit Sub
             btnSesion.Text = "Cerrar Sesión"
             btnSesion.Image = SPA.My.Resources.Resources.desbloquear
             tssUsuario.BackColor = Color.LightGreen
@@ -68,12 +67,12 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub Cronometro_Tick(sender As System.Object, e As System.EventArgs) Handles Cronometro.Tick
-        If EstadoConexion Then
+        If Conexion.Ping() Then
             tssEstadoMySql.BackColor = Color.LightGreen
             tssEstadoMySql.Text = "Conectado"
         Else
             tssEstadoMySql.BackColor = Color.Pink
-            tssEstadoMySql.Text = "Sin conecxión"
+            tssEstadoMySql.Text = "Sin conexión"
         End If
         If UsuarioActivo.Nombre = "Sin usuario" Then
             tssUsuario.BackColor = Color.Pink
@@ -85,7 +84,6 @@ Public Class frmPrincipal
 
         tssFecha.Text = Format(Now(), "Long Date")
         tssHora.Text = Format(Now(), "Long Time")
-        If Conexion.Ping() Then tssEstadoMySql.Text = "fui yo"
     End Sub
 
     Private Sub BtnServicios_Click(sender As Object, e As EventArgs) Handles btnServicios.Click

@@ -27,6 +27,7 @@ Partial Class frmCalendario
         Me.BEliminar = New System.Windows.Forms.Button()
         Me.BEditar = New System.Windows.Forms.Button()
         Me.BNuevo = New System.Windows.Forms.Button()
+        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.SuspendLayout()
         '
         'BSalir
@@ -75,12 +76,20 @@ Partial Class frmCalendario
         Me.BNuevo.TabIndex = 6
         Me.BNuevo.UseVisualStyleBackColor = True
         '
+        'MonthCalendar1
+        '
+        Me.MonthCalendar1.Location = New System.Drawing.Point(143, 48)
+        Me.MonthCalendar1.Name = "MonthCalendar1"
+        Me.MonthCalendar1.TabIndex = 11
+        Me.MonthCalendar1.TodayDate = New Date(2017, 11, 22, 0, 0, 0, 0)
+        '
         'frmCalendario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(747, 399)
         Me.ControlBox = False
+        Me.Controls.Add(Me.MonthCalendar1)
         Me.Controls.Add(Me.BSalir)
         Me.Controls.Add(Me.BBuscar)
         Me.Controls.Add(Me.BEliminar)
@@ -90,7 +99,7 @@ Partial Class frmCalendario
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmCalendario"
-        Me.Text = "frmCalendario"
+        Me.Text = "Calendario de Citas"
         Me.ResumeLayout(False)
 
     End Sub
@@ -100,4 +109,5 @@ Partial Class frmCalendario
     Friend WithEvents BEliminar As Button
     Friend WithEvents BEditar As Button
     Friend WithEvents BNuevo As Button
+    Friend WithEvents MonthCalendar1 As MonthCalendar
 End Class

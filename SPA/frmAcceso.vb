@@ -1,7 +1,7 @@
-﻿Public Class frmAcceso
-    Private Sub frmAcceso_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        tbUsuario.Text = ""
-        tbPassword.Text = ""
+﻿Public Class FrmAcceso
+    Private Sub FrmAcceso_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        tbUsuario.Clear()
+        tbPassword.Clear()
         tbUsuario.Select()
     End Sub
 
@@ -28,7 +28,7 @@
         End If
     End Function
 
-    Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
+    Private Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
         If tbUsuario.Text = My.Settings.u_usuario And tbPassword.Text = My.Settings.u_password Then
             UsuarioActivo.Nombre = My.Settings.u_usuario
             UsuarioActivo.Permiso_Escritura = 1
@@ -49,14 +49,13 @@
             Exit Sub
         Else
             MsgBox("Usuario o clave inválida", vbExclamation, "Error")
-            tbUsuario.Text = ""
-            tbPassword.Text = ""
+            tbUsuario.Clear()
+            tbPassword.Clear()
             tbUsuario.Select()
-            Exit Sub
         End If
     End Sub
 
-    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+    Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         tbUsuario.Text = ""
         tbPassword.Text = ""
         UsuarioActivo.Nombre = "Sin usuario"
@@ -68,7 +67,7 @@
         Me.Close()
     End Sub
 
-    Private Sub tbUsuario_TextChanged(sender As Object, e As EventArgs) Handles tbUsuario.TextChanged
+    Private Sub TbUsuario_TextChanged(sender As Object, e As EventArgs) Handles tbUsuario.TextChanged
         If tbUsuario.Text = "" Then btnAceptar.Enabled = False Else btnAceptar.Enabled = True
     End Sub
 
