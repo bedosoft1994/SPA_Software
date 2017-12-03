@@ -25,14 +25,6 @@ Partial Class frmPrincipal
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ListaImagenes = New System.Windows.Forms.ImageList(Me.components)
-        Me.Cronometro = New System.Windows.Forms.Timer(Me.components)
-        Me.sBarraEstado = New System.Windows.Forms.StatusStrip()
-        Me.tssEstado = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tssEstadoMySql = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tssUsuario = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tssFecha = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tssHora = New System.Windows.Forms.ToolStripStatusLabel()
         Me.btnSesion = New System.Windows.Forms.Button()
         Me.btnAyuda = New System.Windows.Forms.Button()
         Me.btnConfiguracion = New System.Windows.Forms.Button()
@@ -44,6 +36,14 @@ Partial Class frmPrincipal
         Me.btnEmpleados = New System.Windows.Forms.Button()
         Me.btnServicios = New System.Windows.Forms.Button()
         Me.btnEmpresa = New System.Windows.Forms.Button()
+        Me.ListaImagenes = New System.Windows.Forms.ImageList(Me.components)
+        Me.Cronometro = New System.Windows.Forms.Timer(Me.components)
+        Me.sBarraEstado = New System.Windows.Forms.StatusStrip()
+        Me.tssEstado = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssEstadoMySql = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssUsuario = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssFecha = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssHora = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Panel1.SuspendLayout()
         Me.sBarraEstado.SuspendLayout()
         Me.SuspendLayout()
@@ -66,75 +66,6 @@ Partial Class frmPrincipal
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1019, 106)
         Me.Panel1.TabIndex = 0
-        '
-        'ListaImagenes
-        '
-        Me.ListaImagenes.ImageStream = CType(resources.GetObject("ListaImagenes.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ListaImagenes.TransparentColor = System.Drawing.Color.Transparent
-        Me.ListaImagenes.Images.SetKeyName(0, "candado.png")
-        Me.ListaImagenes.Images.SetKeyName(1, "cerrado.png")
-        Me.ListaImagenes.Images.SetKeyName(2, "desbloquear.png")
-        '
-        'Cronometro
-        '
-        '
-        'sBarraEstado
-        '
-        Me.sBarraEstado.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssEstado, Me.tssEstadoMySql, Me.tssUsuario, Me.tssFecha, Me.tssHora})
-        Me.sBarraEstado.Location = New System.Drawing.Point(0, 637)
-        Me.sBarraEstado.Name = "sBarraEstado"
-        Me.sBarraEstado.Size = New System.Drawing.Size(1019, 24)
-        Me.sBarraEstado.TabIndex = 4
-        Me.sBarraEstado.Text = "StatusStrip1"
-        '
-        'tssEstado
-        '
-        Me.tssEstado.Name = "tssEstado"
-        Me.tssEstado.Size = New System.Drawing.Size(796, 19)
-        Me.tssEstado.Spring = True
-        Me.tssEstado.Text = "Estado"
-        Me.tssEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'tssEstadoMySql
-        '
-        Me.tssEstadoMySql.BackColor = System.Drawing.Color.Red
-        Me.tssEstadoMySql.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.tssEstadoMySql.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
-        Me.tssEstadoMySql.Name = "tssEstadoMySql"
-        Me.tssEstadoMySql.Size = New System.Drawing.Size(78, 19)
-        Me.tssEstadoMySql.Text = "Sin conexión"
-        '
-        'tssUsuario
-        '
-        Me.tssUsuario.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.tssUsuario.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
-        Me.tssUsuario.Name = "tssUsuario"
-        Me.tssUsuario.Size = New System.Drawing.Size(51, 19)
-        Me.tssUsuario.Text = "Usuario"
-        '
-        'tssFecha
-        '
-        Me.tssFecha.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.tssFecha.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
-        Me.tssFecha.Name = "tssFecha"
-        Me.tssFecha.Size = New System.Drawing.Size(42, 19)
-        Me.tssFecha.Text = "Fecha"
-        '
-        'tssHora
-        '
-        Me.tssHora.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.tssHora.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
-        Me.tssHora.Name = "tssHora"
-        Me.tssHora.Size = New System.Drawing.Size(37, 19)
-        Me.tssHora.Text = "Hora"
         '
         'btnSesion
         '
@@ -259,7 +190,7 @@ Partial Class frmPrincipal
         Me.btnServicios.Name = "btnServicios"
         Me.btnServicios.Size = New System.Drawing.Size(85, 84)
         Me.btnServicios.TabIndex = 3
-        Me.btnServicios.Text = "Servicios"
+        Me.btnServicios.Text = "Productos y/o Servicios"
         Me.btnServicios.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnServicios.UseVisualStyleBackColor = True
         '
@@ -272,9 +203,78 @@ Partial Class frmPrincipal
         Me.btnEmpresa.Name = "btnEmpresa"
         Me.btnEmpresa.Size = New System.Drawing.Size(85, 84)
         Me.btnEmpresa.TabIndex = 2
-        Me.btnEmpresa.Text = "Empresa"
+        Me.btnEmpresa.Text = "Empresa y Sucursales"
         Me.btnEmpresa.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEmpresa.UseVisualStyleBackColor = True
+        '
+        'ListaImagenes
+        '
+        Me.ListaImagenes.ImageStream = CType(resources.GetObject("ListaImagenes.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ListaImagenes.TransparentColor = System.Drawing.Color.Transparent
+        Me.ListaImagenes.Images.SetKeyName(0, "candado.png")
+        Me.ListaImagenes.Images.SetKeyName(1, "cerrado.png")
+        Me.ListaImagenes.Images.SetKeyName(2, "desbloquear.png")
+        '
+        'Cronometro
+        '
+        '
+        'sBarraEstado
+        '
+        Me.sBarraEstado.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssEstado, Me.tssEstadoMySql, Me.tssUsuario, Me.tssFecha, Me.tssHora})
+        Me.sBarraEstado.Location = New System.Drawing.Point(0, 637)
+        Me.sBarraEstado.Name = "sBarraEstado"
+        Me.sBarraEstado.Size = New System.Drawing.Size(1019, 24)
+        Me.sBarraEstado.TabIndex = 4
+        Me.sBarraEstado.Text = "StatusStrip1"
+        '
+        'tssEstado
+        '
+        Me.tssEstado.Name = "tssEstado"
+        Me.tssEstado.Size = New System.Drawing.Size(796, 19)
+        Me.tssEstado.Spring = True
+        Me.tssEstado.Text = "Estado"
+        Me.tssEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'tssEstadoMySql
+        '
+        Me.tssEstadoMySql.BackColor = System.Drawing.Color.Red
+        Me.tssEstadoMySql.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.tssEstadoMySql.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
+        Me.tssEstadoMySql.Name = "tssEstadoMySql"
+        Me.tssEstadoMySql.Size = New System.Drawing.Size(78, 19)
+        Me.tssEstadoMySql.Text = "Sin conexión"
+        '
+        'tssUsuario
+        '
+        Me.tssUsuario.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.tssUsuario.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
+        Me.tssUsuario.Name = "tssUsuario"
+        Me.tssUsuario.Size = New System.Drawing.Size(51, 19)
+        Me.tssUsuario.Text = "Usuario"
+        '
+        'tssFecha
+        '
+        Me.tssFecha.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.tssFecha.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
+        Me.tssFecha.Name = "tssFecha"
+        Me.tssFecha.Size = New System.Drawing.Size(42, 19)
+        Me.tssFecha.Text = "Fecha"
+        '
+        'tssHora
+        '
+        Me.tssHora.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.tssHora.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
+        Me.tssHora.Name = "tssHora"
+        Me.tssHora.Size = New System.Drawing.Size(37, 19)
+        Me.tssHora.Text = "Hora"
         '
         'frmPrincipal
         '

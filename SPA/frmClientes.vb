@@ -1,21 +1,16 @@
-﻿Imports System.ComponentModel
-
-Public Class FrmClientes
-    Dim AdapterTotal As MySqlDataAdapter
-    Dim DataSetTotal As DataSet
-    Dim DataTabletTotal As DataTable
+﻿Public Class FrmClientes
+    Dim DataTabletTotal As New DataTable
     Dim ListaTotal As Byte
 
-    Dim AdapterConsulta As New MySqlDataAdapter
-    Dim DataSetConsulta As New DataSet
     Dim DataTabletConsulta As New DataTable
     Dim ListaConsulta As Byte
-    Dim RegistroConsulta As DataRow
 
     Dim NuevoRegistro As Boolean
 
     Private Sub FrmClientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DataTabletTotal = Consulta(Comandos("Select"))
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        DataGridAños.DataSource = DataEdad
+        DataTabletTotal = Consulta(Sql:=Comandos(Cual:="Select"))
         ListaTotal = CByte(DataTabletTotal.Rows.Count)
         If ListaTotal = 0 Then
             BNuevo.Enabled = True
@@ -39,11 +34,13 @@ Public Class FrmClientes
         DataGridClientes.Columns(1).Frozen = True
         DataGridClientes.Columns(2).Frozen = True
         EstadoTextBox(False)
-        RegistroActivo.Empresa = 0
+        RegistroActivo.Cliente = -1
         NuevoRegistro = False
     End Sub
 
     Public Function CargarDatos() As Boolean
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        DataGridAños.DataSource = DataEdad
         Dim AdapterConsulta As New MySqlDataAdapter(Comandos(Cual:="idCliente", Busqueda:=CType(RegistroActivo.Cliente, String)), Conexion)
         Dim DataTabletConsulta As New DataTable
         AdapterConsulta.Fill(DataTabletConsulta)
@@ -66,9 +63,11 @@ Public Class FrmClientes
             Label15.Text = CType(DataTabletConsulta.Rows(0)("CreadoFecha"), Date).ToString
             Label16.Text = DataTabletConsulta.Rows(0)("ModificadoPor").ToString
             Label17.Text = CType(DataTabletConsulta.Rows(0)("ModificadoFecha"), Date).ToString
+            RegistroActivo.Cliente = CInt(Label1.Text)
             Return True
         Else
             LimpiarTextBox()
+            RegistroActivo.Cliente = -1
             Return False
         End If
     End Function
@@ -88,6 +87,7 @@ Public Class FrmClientes
         NuevoRegistro = True
         LimpiarTextBox()
         TabControl1.SelectedTab = TabPage1
+        TextBox1.Select()
 
     End Sub
 
@@ -112,14 +112,16 @@ Public Class FrmClientes
                 NuevoRegistro = False
             Else
                 Try
+                    DataTabletTotal.AcceptChanges()
                     Operaciones(Comandos("Update"))
                 Catch ex As Exception
                     MsgBox(ex.Message)
                 End Try
             End If
-            DataTabletTotal.AcceptChanges()
             DataTabletTotal = Consulta(Comandos("Select"))
             DataGridClientes.DataSource = DataTabletTotal
+            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+            DataGridAños.DataSource = DataEdad
 
         Else 'Boton editar
             Editando = True
@@ -132,6 +134,7 @@ Public Class FrmClientes
             ToolTips.SetToolTip(BEliminar, caption:="Cancelar Edición")
             BBuscar.Enabled = False
             EstadoTextBox(True)
+            TextBox1.Select()
 
         End If
     End Sub
@@ -157,9 +160,10 @@ Public Class FrmClientes
             ToolTips.SetToolTip(BEditar, caption:="Modificar Cliente")
             ToolTips.SetToolTip(BEliminar, caption:="Elimimar Cliente")
             DataTabletTotal.RejectChanges()
+            TextBox1.Select()
+            RegistroActivo.Cliente = -1
 
         Else 'Boton eliminar
-            MsgBox(RegistroActivo.Cliente)
             If MsgBox(Prompt:="¿Seguro desea borrar el siguiente registro?", Buttons:=CType(MsgBoxStyle.YesNo + MsgBoxStyle.Question, Global.Microsoft.VisualBasic.MsgBoxStyle)) = vbYes Then
                 Operaciones(Comandos("Delete"))
             End If
@@ -176,10 +180,14 @@ Public Class FrmClientes
             End If
             EstadoTextBox(False)
             Editando = False
+            LimpiarTextBox()
+            RegistroActivo.Cliente = -1
 
             DataTabletTotal.AcceptChanges()
             DataTabletTotal = Consulta(Comandos("Select"))
             DataGridClientes.DataSource = DataTabletTotal
+            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+            DataGridAños.DataSource = DataEdad
 
         End If
     End Sub
@@ -190,12 +198,14 @@ Public Class FrmClientes
         frmBuscarPersonas.ShowDialog()
         CargarDatos()
         TabControl1.SelectedTab = TabPage1
-
+        BEliminar.Enabled = True
+        BEditar.Enabled = True
     End Sub
 
     Private Sub BSalir_Click(sender As Object, e As EventArgs) Handles BSalir.Click
         If Editando Then 'Boton salir
-            If MsgBox("Los datos no se han guardado, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbYes Then
+            If MsgBox(Prompt:="Los datos no se han guardado, ¿Desea perderlos?", Buttons:=CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbYes Then
+                Editando = False
                 Close()
             Else
                 Exit Sub
@@ -228,7 +238,13 @@ Public Class FrmClientes
     End Function
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        TextBox4.Text = Str(CInt(Int(DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25))) & " Años"
+        Dim Edad = CStr(CInt(Int(DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)))
+        If Edad = "1" Then
+            Edad = Edad & " AÑO"
+        Else
+            Edad = Edad & " AÑOS"
+        End If
+        TextBox4.Text = CType(Edad, String)
     End Sub
 
     Private Sub EstadoTextBox(ByVal Estado As Boolean)
@@ -258,7 +274,7 @@ Public Class FrmClientes
         BEditar.Enabled = False
     End Sub
 
-    Private Sub DataGridClientes_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridClientes.CellContentClick
+    Private Sub DataGridClientes_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridClientes.CellContentDoubleClick
         'buscar el registro y mostrarlo en la primera pestaña
         RegistroActivo.Cliente = CInt(DataGridClientes(columnIndex:=0, rowIndex:=DataGridClientes.CurrentCell.RowIndex).Value)
         CargarDatos()
@@ -280,13 +296,13 @@ Public Class FrmClientes
         ListaConsulta = CByte(DataTabletConsulta.Rows.Count)
         If ListaConsulta <> 0 Then
             RegistroActivo.Cliente = CInt(DataTabletConsulta.Rows(0)("idCliente").ToString)
-            NuevoRegistro = True
+            NuevoRegistro = False
             CargarDatos()
         Else
             Dim auxCedula = TextBox1.Text
             LimpiarTextBox()
             TextBox1.Text = auxCedula
-            NuevoRegistro = False
+            NuevoRegistro = True
         End If
     End Sub
 End Class

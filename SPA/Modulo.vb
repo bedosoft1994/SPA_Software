@@ -9,6 +9,7 @@
         Public Permiso_Lectura As Integer
         Public Permiso_Escritura As Integer
         Public Permiso_Impresion As Integer
+        Public Permiso_Admin As Integer
         Public Permiso_Programador As Integer
         Public FechaIngreso As Date
     End Structure

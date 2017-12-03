@@ -40,13 +40,6 @@ Partial Class frmEmpresa
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -72,7 +65,7 @@ Partial Class frmEmpresa
         Me.TabControl1.Location = New System.Drawing.Point(46, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(566, 225)
+        Me.TabControl1.Size = New System.Drawing.Size(476, 225)
         Me.TabControl1.TabIndex = 1
         '
         'TabPage1
@@ -92,13 +85,6 @@ Partial Class frmEmpresa
         Me.TabPage1.Controls.Add(Me.TextBox3)
         Me.TabPage1.Controls.Add(Me.TextBox2)
         Me.TabPage1.Controls.Add(Me.TextBox1)
-        Me.TabPage1.Controls.Add(Me.Label12)
-        Me.TabPage1.Controls.Add(Me.Label11)
-        Me.TabPage1.Controls.Add(Me.Label10)
-        Me.TabPage1.Controls.Add(Me.Label9)
-        Me.TabPage1.Controls.Add(Me.Label8)
-        Me.TabPage1.Controls.Add(Me.Label7)
-        Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.Label5)
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.Label3)
@@ -107,7 +93,7 @@ Partial Class frmEmpresa
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(558, 196)
+        Me.TabPage1.Size = New System.Drawing.Size(468, 196)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Datos Generales"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -177,6 +163,7 @@ Partial Class frmEmpresa
         '
         'TextBox7
         '
+        Me.TextBox7.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox7.Location = New System.Drawing.Point(119, 167)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(338, 20)
@@ -184,6 +171,7 @@ Partial Class frmEmpresa
         '
         'TextBox6
         '
+        Me.TextBox6.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox6.Location = New System.Drawing.Point(119, 141)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(338, 20)
@@ -191,6 +179,7 @@ Partial Class frmEmpresa
         '
         'TextBox5
         '
+        Me.TextBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox5.Location = New System.Drawing.Point(119, 115)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(338, 20)
@@ -198,6 +187,7 @@ Partial Class frmEmpresa
         '
         'TextBox4
         '
+        Me.TextBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox4.Location = New System.Drawing.Point(119, 89)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(338, 20)
@@ -205,6 +195,7 @@ Partial Class frmEmpresa
         '
         'TextBox3
         '
+        Me.TextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox3.Location = New System.Drawing.Point(119, 63)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(338, 20)
@@ -212,6 +203,7 @@ Partial Class frmEmpresa
         '
         'TextBox2
         '
+        Me.TextBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox2.Location = New System.Drawing.Point(119, 37)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(338, 20)
@@ -219,78 +211,16 @@ Partial Class frmEmpresa
         '
         'TextBox1
         '
+        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox1.Location = New System.Drawing.Point(119, 11)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(338, 20)
         Me.TextBox1.TabIndex = 12
         '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(496, 157)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(45, 13)
-        Me.Label12.TabIndex = 11
-        Me.Label12.Text = "Label12"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(496, 144)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(45, 13)
-        Me.Label11.TabIndex = 10
-        Me.Label11.Text = "Label11"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(496, 131)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(45, 13)
-        Me.Label10.TabIndex = 9
-        Me.Label10.Text = "Label10"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(496, 118)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(39, 13)
-        Me.Label9.TabIndex = 8
-        Me.Label9.Text = "Label9"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(496, 105)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(39, 13)
-        Me.Label8.TabIndex = 7
-        Me.Label8.Text = "Label8"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(496, 92)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(39, 13)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Label7"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(496, 79)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(39, 13)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Label6"
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(496, 66)
+        Me.Label5.Location = New System.Drawing.Point(495, 120)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 13)
         Me.Label5.TabIndex = 4
@@ -299,7 +229,7 @@ Partial Class frmEmpresa
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(496, 53)
+        Me.Label4.Location = New System.Drawing.Point(495, 107)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(39, 13)
         Me.Label4.TabIndex = 3
@@ -308,7 +238,7 @@ Partial Class frmEmpresa
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(496, 40)
+        Me.Label3.Location = New System.Drawing.Point(495, 94)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 13)
         Me.Label3.TabIndex = 2
@@ -317,7 +247,7 @@ Partial Class frmEmpresa
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(496, 27)
+        Me.Label2.Location = New System.Drawing.Point(495, 81)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(39, 13)
         Me.Label2.TabIndex = 1
@@ -326,7 +256,7 @@ Partial Class frmEmpresa
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(496, 14)
+        Me.Label1.Location = New System.Drawing.Point(495, 68)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(39, 13)
         Me.Label1.TabIndex = 0
@@ -338,7 +268,7 @@ Partial Class frmEmpresa
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(472, 196)
+        Me.TabPage2.Size = New System.Drawing.Size(558, 196)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Sucursales"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -350,7 +280,7 @@ Partial Class frmEmpresa
         Me.BSalir.Name = "BSalir"
         Me.BSalir.Size = New System.Drawing.Size(28, 30)
         Me.BSalir.TabIndex = 5
-        Me.ToolTips.SetToolTip(Me.BSalir, "Cerrar Ventana")
+        Me.ToolTips.SetToolTip(Me.BSalir, "Salir")
         Me.BSalir.UseVisualStyleBackColor = True
         '
         'BBuscar
@@ -397,7 +327,7 @@ Partial Class frmEmpresa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(620, 245)
+        Me.ClientSize = New System.Drawing.Size(528, 245)
         Me.ControlBox = False
         Me.Controls.Add(Me.BSalir)
         Me.Controls.Add(Me.BBuscar)
@@ -421,17 +351,6 @@ Partial Class frmEmpresa
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents Label18 As Label
@@ -453,4 +372,8 @@ Partial Class frmEmpresa
     Friend WithEvents BBuscar As Button
     Friend WithEvents BSalir As Button
     Friend WithEvents ToolTips As ToolTip
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
 End Class

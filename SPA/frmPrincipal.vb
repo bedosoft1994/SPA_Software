@@ -1,6 +1,4 @@
-﻿Imports System.ComponentModel
-
-Public Class frmPrincipal
+﻿Public Class frmPrincipal
     Private Sub FrmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         UsuarioActivo.Nombre = "Sin usuario"
         tssUsuario.BackColor = Color.Pink
@@ -8,12 +6,15 @@ Public Class frmPrincipal
         UsuarioActivo.Permiso_Escritura = 0
         UsuarioActivo.Permiso_Lectura = 0
         UsuarioActivo.Permiso_Impresion = 0
+        UsuarioActivo.Permiso_Admin = 0
         UsuarioActivo.Permiso_Programador = 0
+
+        RegistroActivo.Empresa = 0
 
         Cronometro.Enabled = True
         tssEstado.Text = $"Versión del sistema: {String.Format("{0}", My.Application.Info.Version.ToString)}"
 
-        Datos.Conectar()
+        Conectar()
 
     End Sub
 
@@ -23,8 +24,8 @@ Public Class frmPrincipal
         btnEmpleados.Enabled = Estado
         btnClientes.Enabled = Estado
         btnCitas.Enabled = Estado
-        btnInformes.Enabled = Estado
-        btnEstadisticas.Enabled = Estado
+        'btnInformes.Enabled = Estado
+        'btnEstadisticas.Enabled = Estado
         btnConfiguracion.Enabled = Estado
     End Sub
 
@@ -33,13 +34,13 @@ Public Class frmPrincipal
             FrmAcceso.ShowDialog()
             If FrmAcceso.tbUsuario.Text = "" Then Exit Sub
             btnSesion.Text = "Cerrar Sesión"
-            btnSesion.Image = SPA.My.Resources.Resources.desbloquear
+            btnSesion.Image = My.Resources.desbloquear
             tssUsuario.BackColor = Color.LightGreen
-            tssUsuario.Text = "Usuario: " & UsuarioActivo.Nombre
+            tssUsuario.Text = $"Usuario: {UsuarioActivo.Nombre}"
             EstadoBotones(True)
         Else
             If Editando Then
-                If MsgBox("Tiene datos no guardados, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, MsgBoxStyle)) = vbCancel Then
+                If MsgBox(Prompt:="Tiene datos no guardados, ¿Desea perderlos?", Buttons:=CType(MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, MsgBoxStyle)) = vbCancel Then
                     Exit Sub
                 End If
             End If
@@ -48,15 +49,17 @@ Public Class frmPrincipal
                 frm.Close()
             Next
             btnSesion.Text = "Abrir Sesión"
-            btnSesion.Image = SPA.My.Resources.Resources.candado
+            btnSesion.Image = My.Resources.candado
             tssUsuario.BackColor = Color.Pink
             UsuarioActivo.Nombre = "Sin usuario"
             UsuarioActivo.Permiso_Escritura = 0
             UsuarioActivo.Permiso_Lectura = 0
             UsuarioActivo.Permiso_Impresion = 0
+            UsuarioActivo.Permiso_Admin = 0
             UsuarioActivo.Permiso_Programador = 0
             UsuarioActivo.FechaIngreso = Today()
-            tssUsuario.Text = "Usuario: " & UsuarioActivo.Nombre
+            RegistroActivo.Empresa = 0
+            tssUsuario.Text = $"Usuario: {UsuarioActivo.Nombre}"
             EstadoBotones(False)
         End If
     End Sub
@@ -76,14 +79,14 @@ Public Class frmPrincipal
         End If
         If UsuarioActivo.Nombre = "Sin usuario" Then
             tssUsuario.BackColor = Color.Pink
-            tssUsuario.Text = "Usuario: " & UsuarioActivo.Nombre
+            tssUsuario.Text = $"Usuario: {UsuarioActivo.Nombre}"
         Else
             tssUsuario.BackColor = Color.LightGreen
-            tssUsuario.Text = "Usuario: " & UsuarioActivo.Nombre
+            tssUsuario.Text = $"Usuario: {UsuarioActivo.Nombre}"
         End If
 
-        tssFecha.Text = Format(Now(), "Long Date")
-        tssHora.Text = Format(Now(), "Long Time")
+        tssFecha.Text = Format(Now(), Style:="Long Date")
+        tssHora.Text = Format(Now(), Style:="Long Time")
     End Sub
 
     Private Sub BtnServicios_Click(sender As Object, e As EventArgs) Handles btnServicios.Click
@@ -92,8 +95,8 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub BtnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
-        frmEmpleados.MdiParent = Me
-        frmEmpleados.Show()
+        FrmEmpleados.MdiParent = Me
+        FrmEmpleados.Show()
     End Sub
 
     Private Sub BtnClientes_Click(sender As Object, e As EventArgs) Handles btnClientes.Click
@@ -131,9 +134,9 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub FrmPrincipal_Closing(sender As Object, e As CancelEventArgs) Handles Me.FormClosing
-        If MsgBox("¿Desea salir de la aplicación?", CType(vbYesNo + vbExclamation + vbDefaultButton2, MsgBoxStyle)) = vbYes Then
+        If MsgBox(Prompt:="¿Desea salir de la aplicación?", Buttons:=CType(vbYesNo + vbExclamation + vbDefaultButton2, MsgBoxStyle)) = vbYes Then
             If Editando Then
-                If MsgBox("No se han  guardado los datos, ¿Desea perderlos?", CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbNo Then
+                If MsgBox(Prompt:="No se han  guardado los datos, ¿Desea perderlos?", Buttons:=CType(MsgBoxStyle.Critical + MsgBoxStyle.YesNo, MsgBoxStyle)) = vbNo Then
                     e.Cancel = True
                     Exit Sub
                 End If

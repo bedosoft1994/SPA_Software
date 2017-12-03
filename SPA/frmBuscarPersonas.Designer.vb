@@ -147,6 +147,7 @@ Partial Class frmBuscarPersonas
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmBuscarPersonas"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "frmBuscarPersonas"
         CType(Me.DGVBusqueda, System.ComponentModel.ISupportInitialize).EndInit()

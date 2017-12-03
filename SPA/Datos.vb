@@ -13,7 +13,7 @@
             Conexion.Open()
             'Conexion.Close()
         Catch ex As Exception
-
+            'MsgBox(ex.ToString)
         End Try
     End Sub
 
