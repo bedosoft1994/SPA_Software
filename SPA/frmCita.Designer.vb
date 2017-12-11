@@ -37,14 +37,14 @@ Partial Class FrmCita
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.BServicio = New System.Windows.Forms.Button()
+        Me.BEmpleado = New System.Windows.Forms.Button()
+        Me.BCliente = New System.Windows.Forms.Button()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.BServicio = New System.Windows.Forms.Button()
-        Me.BEmpleado = New System.Windows.Forms.Button()
-        Me.BCliente = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -81,7 +81,7 @@ Partial Class FrmCita
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(14, 93)
+        Me.Label5.Location = New System.Drawing.Point(12, 93)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 13)
         Me.Label5.TabIndex = 4
@@ -127,6 +127,7 @@ Partial Class FrmCita
         '
         'TextBox1
         '
+        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox1.Location = New System.Drawing.Point(60, 12)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
@@ -135,6 +136,7 @@ Partial Class FrmCita
         '
         'TextBox2
         '
+        Me.TextBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox2.Location = New System.Drawing.Point(88, 38)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
@@ -143,6 +145,7 @@ Partial Class FrmCita
         '
         'TextBox3
         '
+        Me.TextBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox3.Location = New System.Drawing.Point(75, 64)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
@@ -161,7 +164,7 @@ Partial Class FrmCita
         '
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"8:00 a.m.", "8:30 a.m.", "9:00 a.m.", "9:30 a.m.", "10:00 a.m.", "10:30 a.m.", "11:00 a.m.", "11:30 a.m.", "12:00 m.", "12:30 m.", "1:00 p.m.", "1:30 p.m.", "2:00 p.m.", "2:30 p.m.", "3:00 p.m.", "3:30 p.m.", "4:00 p.m.", "4:30 p.m.", "5:00 p.m.", "5:30 p.m.", "6:00 p.m.", "6:30 p.m."})
+        Me.ComboBox1.Items.AddRange(New Object() {"7:00 a.m.", "8:00 a.m.", "9:00 a.m.", "10:00 a.m.", "11:00 a.m.", "12:00 m.", "1:00 p.m.", "2:00 p.m.", "3:00 p.m.", "4:00 p.m.", "5:00 p.m.", "6:00 p.m."})
         Me.ComboBox1.Location = New System.Drawing.Point(244, 90)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(68, 21)
@@ -171,11 +174,41 @@ Partial Class FrmCita
         '
         Me.ToolTip.IsBalloon = True
         '
+        'BServicio
+        '
+        Me.BServicio.Image = Global.SPA.My.Resources.Resources.Buscar1
+        Me.BServicio.Location = New System.Drawing.Point(433, 62)
+        Me.BServicio.Name = "BServicio"
+        Me.BServicio.Size = New System.Drawing.Size(35, 24)
+        Me.BServicio.TabIndex = 18
+        Me.ToolTip.SetToolTip(Me.BServicio, "Seleccionar Servicio")
+        Me.BServicio.UseVisualStyleBackColor = True
+        '
+        'BEmpleado
+        '
+        Me.BEmpleado.Image = Global.SPA.My.Resources.Resources.Buscar1
+        Me.BEmpleado.Location = New System.Drawing.Point(433, 36)
+        Me.BEmpleado.Name = "BEmpleado"
+        Me.BEmpleado.Size = New System.Drawing.Size(35, 24)
+        Me.BEmpleado.TabIndex = 17
+        Me.ToolTip.SetToolTip(Me.BEmpleado, "Buscar Empleado")
+        Me.BEmpleado.UseVisualStyleBackColor = True
+        '
+        'BCliente
+        '
+        Me.BCliente.Image = Global.SPA.My.Resources.Resources.Buscar1
+        Me.BCliente.Location = New System.Drawing.Point(433, 10)
+        Me.BCliente.Name = "BCliente"
+        Me.BCliente.Size = New System.Drawing.Size(35, 24)
+        Me.BCliente.TabIndex = 16
+        Me.ToolTip.SetToolTip(Me.BCliente, "Buscar Cliente")
+        Me.BCliente.UseVisualStyleBackColor = True
+        '
         'ComboBox2
         '
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Media hora", "1 hora", "1 hora y media", "2 horas", "2 horas y media", "3 horas"})
+        Me.ComboBox2.Items.AddRange(New Object() {"1 hora", "2 horas", "3 horas", "4 horas"})
         Me.ComboBox2.Location = New System.Drawing.Point(374, 90)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(94, 21)
@@ -217,36 +250,6 @@ Partial Class FrmCita
         Me.Label11.TabIndex = 26
         Me.Label11.Text = "Label11"
         '
-        'BServicio
-        '
-        Me.BServicio.Image = Global.SPA.My.Resources.Resources.Buscar1
-        Me.BServicio.Location = New System.Drawing.Point(433, 62)
-        Me.BServicio.Name = "BServicio"
-        Me.BServicio.Size = New System.Drawing.Size(35, 24)
-        Me.BServicio.TabIndex = 18
-        Me.ToolTip.SetToolTip(Me.BServicio, "Seleccionar Servicio")
-        Me.BServicio.UseVisualStyleBackColor = True
-        '
-        'BEmpleado
-        '
-        Me.BEmpleado.Image = Global.SPA.My.Resources.Resources.Buscar1
-        Me.BEmpleado.Location = New System.Drawing.Point(433, 36)
-        Me.BEmpleado.Name = "BEmpleado"
-        Me.BEmpleado.Size = New System.Drawing.Size(35, 24)
-        Me.BEmpleado.TabIndex = 17
-        Me.ToolTip.SetToolTip(Me.BEmpleado, "Buscar Empleado")
-        Me.BEmpleado.UseVisualStyleBackColor = True
-        '
-        'BCliente
-        '
-        Me.BCliente.Image = Global.SPA.My.Resources.Resources.Buscar1
-        Me.BCliente.Location = New System.Drawing.Point(433, 10)
-        Me.BCliente.Name = "BCliente"
-        Me.BCliente.Size = New System.Drawing.Size(35, 24)
-        Me.BCliente.TabIndex = 16
-        Me.ToolTip.SetToolTip(Me.BCliente, "Buscar Cliente")
-        Me.BCliente.UseVisualStyleBackColor = True
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -258,6 +261,7 @@ Partial Class FrmCita
         '
         'TextBox4
         '
+        Me.TextBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox4.Location = New System.Drawing.Point(281, 64)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.ReadOnly = True
@@ -267,7 +271,7 @@ Partial Class FrmCita
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(14, 126)
+        Me.Label12.Location = New System.Drawing.Point(12, 126)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(81, 13)
         Me.Label12.TabIndex = 29
@@ -275,10 +279,10 @@ Partial Class FrmCita
         '
         'TextBox5
         '
+        Me.TextBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TextBox5.Location = New System.Drawing.Point(102, 123)
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
         Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox5.Size = New System.Drawing.Size(366, 69)
         Me.TextBox5.TabIndex = 30

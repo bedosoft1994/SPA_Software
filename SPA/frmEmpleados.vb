@@ -8,8 +8,9 @@
     Dim NuevoRegistro As Boolean
 
     Private Sub FrmEmpleados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idEmpleado, Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
         DataGridAños.DataSource = DataEdad
+        DataGridAños.Columns(0).Visible = False
         DataTabletTotal = Consulta(Sql:=Comandos(Cual:="Select"))
         ListaTotal = CByte(DataTabletTotal.Rows.Count)
         If ListaTotal = 0 Then
@@ -37,10 +38,11 @@
         EstadoTextBox(False)
         RegistroActivo.Empleado = -1
         NuevoRegistro = False
+        ComboBox1.SelectedIndex = Today.Month - 1
     End Sub
 
     Public Function CargarDatos() As Boolean
-        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idEmpleado, Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
         DataGridAños.DataSource = DataEdad
         Dim AdapterConsulta As New MySqlDataAdapter(Comandos(Cual:="idEmpleado", Busqueda:=CType(RegistroActivo.Empleado, String)), connection:=Conexion)
         Dim DataTabletConsulta As New DataTable
@@ -122,7 +124,7 @@
             End If
             DataTabletTotal = Consulta(Sql:=Comandos("Select"))
             DataGridEmpleados.DataSource = DataTabletTotal
-            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idEmpleado, Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
             DataGridAños.DataSource = DataEdad
 
         Else 'Boton editar
@@ -240,23 +242,47 @@
     End Function
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        Dim Edad = CStr(CInt(Int(DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)))
+        Dim Edad = CStr(Int(Number:=DateDiff(Interval:=DateInterval.DayOfYear, Date1:=DateTimePicker1.Value, Date2:=Now()) / 365.25))
         If Edad = "1" Then
-            Edad = Edad & " AÑO"
+            Edad = $"{Edad} AÑO"
         Else
-            Edad = Edad & " AÑOS"
+            Edad = $"{Edad} AÑOS"
         End If
         TextBox4.Text = CType(Edad, String)
     End Sub
 
     Private Sub DateTimePicker2_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker2.ValueChanged
-        Dim Edad = CStr(CInt(Int(DateDiff(DateInterval.DayOfYear, DateTimePicker2.Value, Now()) / 365.25)))
-        If Edad = "1" Then
-            Edad = Edad & " AÑO"
+        Dim Años = Int(Number:=DateDiff(Interval:=DateInterval.DayOfYear, Date1:=DateTimePicker2.Value, Date2:=Now()) / 365.25)
+        Dim Meses = DateDiff(Interval:=DateInterval.Month, Date1:=DateTimePicker2.Value, Date2:=Now()) Mod 12
+        Dim auxStrig As String = ""
+        Select Case Años
+            Case < 1
+                auxStrig = "VERIFICAR LA FECHA"
+            Case 1
+                auxStrig = $"{Años} AÑO"
+            Case Else
+                auxStrig = $"{Años} AÑOS"
+        End Select
+        If CInt(Años) = 0 Then
+            Select Case CInt(Meses)
+                Case < 1
+                    auxStrig = "VERIFICAR LA FECHA"
+                Case 1
+                    auxStrig = $"{Meses} MES"
+                Case Else
+                    auxStrig = $"{Meses} MESES"
+            End Select
         Else
-            Edad = Edad & " AÑOS"
+            Select Case CInt(Meses)
+                Case < 1
+'                    auxStrig = "VERIFICAR LA FECHA"
+                Case 1
+                    auxStrig = $"{auxStrig} y {Meses} MES"
+                Case Else
+                    auxStrig = $"{auxStrig} y {Meses} MESES"
+            End Select
         End If
-        TextBox13.Text = CType(Edad, String)
+        TextBox13.Text = auxStrig
     End Sub
 
     Private Sub EstadoTextBox(ByVal Estado As Boolean)
@@ -266,16 +292,14 @@
                 TabPage1.Controls(F).Enabled = Estado
             End If
         Next F
+        DateTimePicker1.Enabled = Estado
+        DateTimePicker2.Enabled = Estado
         If Estado Then
             TextBox4.Enabled = Not Estado
             TextBox13.Enabled = Not Estado
-            DateTimePicker1.Enabled = Estado
-            DateTimePicker2.Enabled = Estado
         Else
             TextBox4.Enabled = Estado
             TextBox13.Enabled = Estado
-            DateTimePicker1.Enabled = Estado
-            DateTimePicker2.Enabled = Estado
         End If
     End Sub
 
@@ -294,6 +318,12 @@
     Private Sub DataGridEmpleados_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridEmpleados.CellContentDoubleClick
         'buscar el registro y mostrarlo en la primera pestaña
         RegistroActivo.Empleado = CInt(DataGridEmpleados(columnIndex:=0, rowIndex:=DataGridEmpleados.CurrentCell.RowIndex).Value)
+        CargarDatos()
+        TabControl1.SelectedTab = TabPage1
+    End Sub
+
+    Private Sub DataGridAños_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridAños.CellContentDoubleClick
+        RegistroActivo.Empleado = CInt(DataGridAños(columnIndex:=0, rowIndex:=DataGridAños.CurrentCell.RowIndex).Value)
         CargarDatos()
         TabControl1.SelectedTab = TabPage1
     End Sub
@@ -334,5 +364,14 @@
         Else
             'RegistroActivo.Empleado = -1
         End If
+    End Sub
+
+    Private Sub TabPage3_Click(sender As Object, e As EventArgs) Handles TabPage3.Click
+
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idEmpleado, Nombres, Apellidos, FechaNacimiento FROM Empleados WHERE Month(FechaNacimiento)={ComboBox1.SelectedIndex + 1} ORDER BY FechaNacimiento")
+        DataGridAños.DataSource = DataEdad
     End Sub
 End Class

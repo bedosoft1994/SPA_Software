@@ -12,6 +12,7 @@
         RegistroActivo.Empresa = 0
 
         Cronometro.Enabled = True
+        Me.Text = My.Application.Info.Title.ToString
         tssEstado.Text = $"Versión del sistema: {String.Format("{0}", My.Application.Info.Version.ToString)}"
 
         Conectar()

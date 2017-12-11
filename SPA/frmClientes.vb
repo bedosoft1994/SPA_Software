@@ -8,8 +8,9 @@
     Dim NuevoRegistro As Boolean
 
     Private Sub FrmClientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idCliente, Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
         DataGridAños.DataSource = DataEdad
+        DataGridAños.Columns(0).Visible = False
         DataTabletTotal = Consulta(Sql:=Comandos(Cual:="Select"))
         ListaTotal = CByte(DataTabletTotal.Rows.Count)
         If ListaTotal = 0 Then
@@ -30,16 +31,18 @@
         DataGridClientes.Columns(14).Visible = False
         DataGridClientes.Columns(15).Visible = False
         DataGridClientes.Columns(16).Visible = False
+        DataGridClientes.Columns(17).Visible = False
         DataGridClientes.Columns(0).Frozen = True
         DataGridClientes.Columns(1).Frozen = True
         DataGridClientes.Columns(2).Frozen = True
         EstadoTextBox(False)
         RegistroActivo.Cliente = -1
         NuevoRegistro = False
+        ComboBox1.SelectedIndex = Today.Month - 1
     End Sub
 
     Public Function CargarDatos() As Boolean
-        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idCliente, Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
         DataGridAños.DataSource = DataEdad
         Dim AdapterConsulta As New MySqlDataAdapter(Comandos(Cual:="idCliente", Busqueda:=CType(RegistroActivo.Cliente, String)), Conexion)
         Dim DataTabletConsulta As New DataTable
@@ -52,6 +55,7 @@
             TextBox2.Text = DataTabletConsulta.Rows(0)("Nombres").ToString
             TextBox3.Text = DataTabletConsulta.Rows(0)("Apellidos").ToString
             DateTimePicker1.Value = CType(DataTabletConsulta.Rows(0)("FechaNacimiento"), Date)
+            DateTimePicker2.Value = CType(DataTabletConsulta.Rows(0)("FechaIngreso"), Date)
             TextBox6.Text = DataTabletConsulta.Rows(0)("LugarNacimiento").ToString
             TextBox5.Text = DataTabletConsulta.Rows(0)("Genero").ToString
             TextBox7.Text = DataTabletConsulta.Rows(0)("Direccion").ToString
@@ -120,7 +124,7 @@
             End If
             DataTabletTotal = Consulta(Comandos("Select"))
             DataGridClientes.DataSource = DataTabletTotal
-            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idCliente, Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
             DataGridAños.DataSource = DataEdad
 
         Else 'Boton editar
@@ -141,17 +145,17 @@
 
     Private Sub BEliminar_Click(sender As Object, e As EventArgs) Handles BEliminar.Click
         If Editando Then 'Boton cancelar
-            If ListaTotal = 0 Then
-                BNuevo.Enabled = True
-                BEditar.Enabled = False
-                BEliminar.Enabled = False
-                BBuscar.Enabled = False
-            Else
-                BNuevo.Enabled = True
-                BEditar.Enabled = True
-                BEliminar.Enabled = True
-                BBuscar.Enabled = True
-            End If
+            'If ListaTotal = 0 Then
+            BNuevo.Enabled = True
+            BEditar.Enabled = False
+            BEliminar.Enabled = False
+            '    BBuscar.Enabled = False
+            'Else
+            '    BNuevo.Enabled = True
+            '    BEditar.Enabled = True
+            '    BEliminar.Enabled = True
+            BBuscar.Enabled = True
+            'End If
             EstadoTextBox(False)
             LimpiarTextBox()
             Editando = False
@@ -186,7 +190,7 @@
             DataTabletTotal.AcceptChanges()
             DataTabletTotal = Consulta(Comandos("Select"))
             DataGridClientes.DataSource = DataTabletTotal
-            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
+            Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idCliente, Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={Today().Month} ORDER BY FechaNacimiento")
             DataGridAños.DataSource = DataEdad
 
         End If
@@ -228,23 +232,57 @@
             Case "Select"
                 Comando = "SELECT * FROM Clientes"
             Case "Insert"
-                Comando = $"INSERT INTO Clientes (idEmpresa, Identificacion, Nombres, Apellidos, FechaNacimiento, LugarNacimiento, Genero, Direccion, Telefono1, Telefono2, Correo, Observacion, CreadoPor, CreadoFecha, ModificadoPor, ModificadoFecha) VALUES ('{RegistroActivo.Empresa}', '{TextBox1.Text}', '{TextBox2.Text}', '{TextBox3.Text}', '{Format(DateTimePicker1.Value, "yyyy/MM/dd")}', '{TextBox6.Text}', '{TextBox5.Text}', '{TextBox7.Text}', '{TextBox8.Text}', '{TextBox9.Text}', '{TextBox10.Text}', '{TextBox11.Text}', '{UsuarioActivo.Nombre}', '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}', '{UsuarioActivo.Nombre}', '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}')"
+                Comando = $"INSERT INTO Clientes (idEmpresa, Identificacion, Nombres, Apellidos, FechaNacimiento, LugarNacimiento, FechaIngreso, Genero, Direccion, Telefono1, Telefono2, Correo, Observacion, CreadoPor, CreadoFecha, ModificadoPor, ModificadoFecha) VALUES ('{RegistroActivo.Empresa}', '{TextBox1.Text}', '{TextBox2.Text}', '{TextBox3.Text}', '{Format(DateTimePicker1.Value, "yyyy/MM/dd")}', '{TextBox6.Text}', '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}', '{TextBox5.Text}', '{TextBox7.Text}', '{TextBox8.Text}', '{TextBox9.Text}', '{TextBox10.Text}', '{TextBox11.Text}', '{UsuarioActivo.Nombre}', '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}', '{UsuarioActivo.Nombre}', '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}')"
             Case "Delete"
                 Comando = $"DELETE FROM Clientes WHERE idCliente = '{RegistroActivo.Cliente}'"
             Case "Update"
-                Comando = $"UPDATE Clientes SET idEmpresa = '{RegistroActivo.Empresa}', Identificacion = '{TextBox1.Text}', Nombres = '{TextBox2.Text}', Apellidos = '{TextBox3.Text}', FechaNacimiento = '{Format(DateTimePicker1.Value, "yyyy/MM/dd")}', LugarNacimiento = '{TextBox6.Text}', Genero = '{TextBox5.Text}', Direccion = '{TextBox7.Text}', Telefono1 = '{TextBox8.Text}', Telefono2 = '{TextBox9.Text}', Correo = '{TextBox10.Text}', Observacion = '{TextBox11.Text}', ModificadoPor = '{UsuarioActivo.Nombre}', ModificadoFecha = '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}' WHERE idCliente = '{RegistroActivo.Cliente}'"
+                Comando = $"UPDATE Clientes SET idEmpresa = '{RegistroActivo.Empresa}', Identificacion = '{TextBox1.Text}', Nombres = '{TextBox2.Text}', Apellidos = '{TextBox3.Text}', FechaNacimiento = '{Format(DateTimePicker1.Value, "yyyy/MM/dd")}', LugarNacimiento = '{TextBox6.Text}', FechaIngreso = '{Format(DateTimePicker2.Value, "yyyy/MM/dd")}', Genero = '{TextBox5.Text}', Direccion = '{TextBox7.Text}', Telefono1 = '{TextBox8.Text}', Telefono2 = '{TextBox9.Text}', Correo = '{TextBox10.Text}', Observacion = '{TextBox11.Text}', ModificadoPor = '{UsuarioActivo.Nombre}', ModificadoFecha = '{Format(Now(), "yyyy-MM-dd hh:mm:ss")}' WHERE idCliente = '{RegistroActivo.Cliente}'"
         End Select
         Return Comando
     End Function
 
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        Dim Edad = CStr(CInt(Int(DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)))
-        If Edad = "1" Then
-            Edad = Edad & " AÑO"
+        Dim Edad = CStr(Int(Number:=DateDiff(Interval:=DateInterval.DayOfYear, Date1:=DateTimePicker1.Value, Date2:=Now()) / 365.25))
+        If CStr(Int(Number:=DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)) = "1" Then
+            Edad = CStr(Int(Number:=DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)) & " AÑO"
         Else
-            Edad = Edad & " AÑOS"
+            Edad = CStr(Int(Number:=DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)) & " AÑOS"
         End If
-        TextBox4.Text = CType(Edad, String)
+        TextBox4.Text = CType(CStr(Int(Number:=DateDiff(DateInterval.DayOfYear, DateTimePicker1.Value, Now()) / 365.25)), String)
+    End Sub
+
+    Private Sub DateTimePicker2_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker2.ValueChanged
+        Dim Años = Int(Number:=DateDiff(Interval:=DateInterval.DayOfYear, Date1:=DateTimePicker2.Value, Date2:=Now()) / 365.25)
+        Dim Meses = DateDiff(Interval:=DateInterval.Month, Date1:=DateTimePicker2.Value, Date2:=Now()) Mod 12
+        Dim auxStrig As String = ""
+        Select Case Años
+            Case < 1
+                auxStrig = "VERIFICAR LA FECHA"
+            Case 1
+                auxStrig = $"{Años} AÑO"
+            Case Else
+                auxStrig = $"{Años} AÑOS"
+        End Select
+        If CInt(Años) = 0 Then
+            Select Case CInt(Meses)
+                Case < 1
+                    auxStrig = "VERIFICAR LA FECHA"
+                Case 1
+                    auxStrig = $"{Meses} MES"
+                Case Else
+                    auxStrig = $"{Meses} MESES"
+            End Select
+        Else
+            Select Case CInt(Meses)
+                Case < 1
+'                    auxStrig = "VERIFICAR LA FECHA"
+                Case 1
+                    auxStrig = $"{auxStrig} y {Meses} MES"
+                Case Else
+                    auxStrig = $"{auxStrig} y {Meses} MESES"
+            End Select
+        End If
+        TextBox13.Text = auxStrig
     End Sub
 
     Private Sub EstadoTextBox(ByVal Estado As Boolean)
@@ -254,12 +292,12 @@
                 TabPage1.Controls(F).Enabled = Estado
             End If
         Next F
+        DateTimePicker1.Enabled = Estado
+        DateTimePicker2.Enabled = Estado
         If Estado Then
             TextBox4.Enabled = Not Estado
-            DateTimePicker1.Enabled = Estado
         Else
             TextBox4.Enabled = Estado
-            DateTimePicker1.Enabled = Estado
         End If
     End Sub
 
@@ -271,12 +309,20 @@
             End If
         Next F
         DateTimePicker1.Value = Now()
-        BEditar.Enabled = False
+        DateTimePicker2.Value = Now()
+        'BEditar.Enabled = False
     End Sub
 
     Private Sub DataGridClientes_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridClientes.CellContentDoubleClick
         'buscar el registro y mostrarlo en la primera pestaña
         RegistroActivo.Cliente = CInt(DataGridClientes(columnIndex:=0, rowIndex:=DataGridClientes.CurrentCell.RowIndex).Value)
+        CargarDatos()
+        BEliminar.Enabled = True
+        TabControl1.SelectedTab = TabPage1
+    End Sub
+
+    Private Sub DataGridAños_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridAños.CellContentDoubleClick
+        RegistroActivo.Cliente = CInt(DataGridAños(columnIndex:=0, rowIndex:=DataGridAños.CurrentCell.RowIndex).Value)
         CargarDatos()
         TabControl1.SelectedTab = TabPage1
     End Sub
@@ -304,5 +350,10 @@
             TextBox1.Text = auxCedula
             NuevoRegistro = True
         End If
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Dim DataEdad As DataTable = Consulta(Sql:=$"SELECT idCliente, Nombres, Apellidos, FechaNacimiento FROM Clientes WHERE Month(FechaNacimiento)={ComboBox1.SelectedIndex + 1} ORDER BY FechaNacimiento")
+        DataGridAños.DataSource = DataEdad
     End Sub
 End Class

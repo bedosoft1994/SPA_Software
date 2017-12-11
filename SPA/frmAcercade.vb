@@ -1,6 +1,6 @@
-﻿Public NotInheritable Class frmAcercade
+﻿Public NotInheritable Class FrmAcercade
 
-    Private Sub frmAcercade_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmAcercade_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' Establezca el título del formulario.
         Dim ApplicationTitle As String
         If My.Application.Info.Title <> "" Then
@@ -12,7 +12,7 @@
         ' Inicialice todo el texto mostrado en el cuadro Acerca de.
         ' TODO: personalice la información del ensamblado de la aplicación en el panel "Aplicación" del 
         '    cuadro de diálogo propiedades del proyecto (bajo el menú "Proyecto").
-        Me.LabelProductName.Text = My.Application.Info.ProductName
+        Me.LabelProductName.Text = My.Application.Info.Title
         Me.LabelVersion.Text = String.Format("Versión {0}", My.Application.Info.Version.ToString)
         Me.LabelCopyright.Text = My.Application.Info.Copyright
         Me.LabelCompanyName.Text = My.Application.Info.CompanyName

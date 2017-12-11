@@ -30,6 +30,7 @@ Partial Class FrmEmpleados
         Me.BNuevo = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BBuscarEmopresa = New System.Windows.Forms.Button()
@@ -75,7 +76,8 @@ Partial Class FrmEmpleados
         Me.DataGridAños = New System.Windows.Forms.DataGridView()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTips = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -144,7 +146,7 @@ Partial Class FrmEmpleados
         Me.TabControl1.Location = New System.Drawing.Point(46, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(474, 375)
+        Me.TabControl1.Size = New System.Drawing.Size(474, 367)
         Me.TabControl1.TabIndex = 16
         '
         'TabPage1
@@ -186,10 +188,19 @@ Partial Class FrmEmpleados
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(466, 346)
+        Me.TabPage1.Size = New System.Drawing.Size(466, 338)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Información Individual"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 207)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 41)
+        Me.Button1.TabIndex = 44
+        Me.Button1.Text = "Citas Asignadas"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -211,7 +222,7 @@ Partial Class FrmEmpleados
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Location = New System.Drawing.Point(9, 254)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(444, 82)
+        Me.GroupBox1.Size = New System.Drawing.Size(444, 75)
         Me.GroupBox1.TabIndex = 42
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Datos laborales"
@@ -229,7 +240,7 @@ Partial Class FrmEmpleados
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(241, 49)
+        Me.Label5.Location = New System.Drawing.Point(212, 49)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(99, 13)
         Me.Label5.TabIndex = 5
@@ -238,9 +249,9 @@ Partial Class FrmEmpleados
         'TextBox13
         '
         Me.TextBox13.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.TextBox13.Location = New System.Drawing.Point(346, 46)
+        Me.TextBox13.Location = New System.Drawing.Point(317, 46)
         Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(92, 20)
+        Me.TextBox13.Size = New System.Drawing.Size(121, 20)
         Me.TextBox13.TabIndex = 4
         '
         'DateTimePicker2
@@ -248,7 +259,7 @@ Partial Class FrmEmpleados
         Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DateTimePicker2.Location = New System.Drawing.Point(106, 46)
         Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(129, 20)
+        Me.DateTimePicker2.Size = New System.Drawing.Size(100, 20)
         Me.DateTimePicker2.TabIndex = 3
         '
         'TextBox12
@@ -549,7 +560,7 @@ Partial Class FrmEmpleados
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(466, 346)
+        Me.TabPage2.Size = New System.Drawing.Size(466, 338)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Listado General"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -566,18 +577,20 @@ Partial Class FrmEmpleados
         Me.DataGridEmpleados.MultiSelect = False
         Me.DataGridEmpleados.Name = "DataGridEmpleados"
         Me.DataGridEmpleados.ReadOnly = True
-        Me.DataGridEmpleados.Size = New System.Drawing.Size(456, 336)
+        Me.DataGridEmpleados.Size = New System.Drawing.Size(456, 328)
         Me.DataGridEmpleados.TabIndex = 0
         '
         'TabPage3
         '
         Me.TabPage3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.TabPage3.Controls.Add(Me.ComboBox1)
+        Me.TabPage3.Controls.Add(Me.Label7)
         Me.TabPage3.Controls.Add(Me.DataGridAños)
         Me.TabPage3.Controls.Add(Me.PictureBox1)
         Me.TabPage3.Location = New System.Drawing.Point(4, 25)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(466, 346)
+        Me.TabPage3.Size = New System.Drawing.Size(466, 338)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Cumpleaños"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -589,18 +602,18 @@ Partial Class FrmEmpleados
         Me.DataGridAños.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridAños.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.DataGridAños.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridAños.Location = New System.Drawing.Point(6, 9)
+        Me.DataGridAños.Location = New System.Drawing.Point(3, 3)
         Me.DataGridAños.Name = "DataGridAños"
         Me.DataGridAños.ReadOnly = True
-        Me.DataGridAños.Size = New System.Drawing.Size(384, 327)
+        Me.DataGridAños.Size = New System.Drawing.Size(366, 328)
         Me.DataGridAños.TabIndex = 3
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.SPA.My.Resources.Resources.cumpleaños
-        Me.PictureBox1.Location = New System.Drawing.Point(396, 117)
+        Me.PictureBox1.Location = New System.Drawing.Point(378, 117)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(59, 110)
+        Me.PictureBox1.Size = New System.Drawing.Size(78, 110)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 2
         Me.PictureBox1.TabStop = False
@@ -609,20 +622,30 @@ Partial Class FrmEmpleados
         '
         Me.ToolTips.IsBalloon = True
         '
-        'Button1
+        'ComboBox1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 207)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 41)
-        Me.Button1.TabIndex = 44
-        Me.Button1.Text = "Citas Asignadas"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"})
+        Me.ComboBox1.Location = New System.Drawing.Point(375, 25)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(81, 21)
+        Me.ComboBox1.TabIndex = 5
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(375, 9)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(81, 13)
+        Me.Label7.TabIndex = 4
+        Me.Label7.Text = "Buscar por Mes"
         '
         'FrmEmpleados
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(526, 391)
+        Me.ClientSize = New System.Drawing.Size(526, 385)
         Me.ControlBox = False
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.BSalir)
@@ -643,6 +666,7 @@ Partial Class FrmEmpleados
         Me.TabPage2.ResumeLayout(False)
         CType(Me.DataGridEmpleados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         CType(Me.DataGridAños, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -702,4 +726,6 @@ Partial Class FrmEmpleados
     Friend WithEvents DataGridAños As DataGridView
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label7 As Label
 End Class
